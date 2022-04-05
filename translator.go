@@ -1,9 +1,10 @@
 package i18n
 
 import (
-	"azizka-go/i18n/options"
 	"strconv"
 	"strings"
+
+	"github.com/azizka85/azizka-go-i18n/options"
 )
 
 type Translator struct {

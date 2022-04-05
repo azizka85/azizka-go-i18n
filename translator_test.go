@@ -1,8 +1,9 @@
 package i18n
 
 import (
-	"azizka-go/i18n/options"
 	"testing"
+
+	"github.com/azizka85/azizka-go-i18n/options"
 )
 
 func TestTranslateHello(t *testing.T) {
