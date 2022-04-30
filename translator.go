@@ -55,12 +55,27 @@ func (translator *Translator) Reset() {
 
 func (translator *Translator) Translate(
 	text string,
-	defaultNumOrFormatting interface{},
-	numOrFormattingOrContext interface{},
-	formattingOrContext map[string]string,
+	input ...interface{},
 ) string {
 	var num interface{} = nil
 	var formatting map[string]string = nil
+	var defaultNumOrFormatting interface{}
+	var numOrFormattingOrContext interface{}
+	var formattingOrContext interface{}
+
+	argsLen := len(input)
+
+	if argsLen > 0 {
+		defaultNumOrFormatting = input[0]
+	}
+
+	if argsLen > 1 {
+		numOrFormattingOrContext = input[1]
+	}
+
+	if argsLen > 2 {
+		formattingOrContext = input[2]
+	}
 
 	context := translator.globalContext
 
@@ -77,20 +92,23 @@ func (translator *Translator) Translate(
 			formatting = data
 		}
 
-		if formattingOrContext != nil {
-			context = formattingOrContext
+		if data, ok := formattingOrContext.(map[string]string); ok {
+			context = data
 		}
 	} else {
 		if data, ok := numOrFormattingOrContext.(int); ok {
 			num = data
-			formatting = formattingOrContext
+
+			if data, ok := formattingOrContext.(map[string]string); ok {
+				formatting = data
+			}
 		} else {
 			if data, ok := numOrFormattingOrContext.(map[string]string); ok {
 				formatting = data
 			}
 
-			if formattingOrContext != nil {
-				context = formattingOrContext
+			if data, ok := formattingOrContext.(map[string]string); ok {
+				context = data
 			}
 		}
 	}

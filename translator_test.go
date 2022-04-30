@@ -19,7 +19,7 @@ func TestTranslateHello(t *testing.T) {
 		Contexts: nil,
 	})
 
-	actual := translator.Translate(key, nil, nil, nil)
+	actual := translator.Translate(key)
 
 	if actual != value {
 		t.Errorf("Should translate '%v' to '%v' but the result is '%v'", key, value, actual)
@@ -47,25 +47,25 @@ func TestTranslatePluralText(t *testing.T) {
 		Contexts: nil,
 	})
 
-	actual := translator.Translate(key, 0, nil, nil)
+	actual := translator.Translate(key, 0)
 
 	if actual != zeroComments {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, 0, zeroComments, actual)
 	}
 
-	actual = translator.Translate(key, 1, nil, nil)
+	actual = translator.Translate(key, 1)
 
 	if actual != oneComment {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, 1, oneComment, actual)
 	}
 
-	actual = translator.Translate(key, 2, nil, nil)
+	actual = translator.Translate(key, 2)
 
 	if actual != twoComments {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, 2, twoComments, actual)
 	}
 
-	actual = translator.Translate(key, 10, nil, nil)
+	actual = translator.Translate(key, 10)
 
 	if actual != tenComments {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, 10, tenComments, actual)
@@ -98,43 +98,43 @@ func TestTranslatePluralTextWithNegativeNumber(t *testing.T) {
 		Contexts: nil,
 	})
 
-	actual := translator.Translate(key, -10, nil, nil)
+	actual := translator.Translate(key, -10)
 
 	if actual != dueTenDaysAgo {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, -10, dueTenDaysAgo, actual)
 	}
 
-	actual = translator.Translate(key, -2, nil, nil)
+	actual = translator.Translate(key, -2)
 
 	if actual != dueTwoDaysAgo {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, -2, dueTwoDaysAgo, actual)
 	}
 
-	actual = translator.Translate(key, -1, nil, nil)
+	actual = translator.Translate(key, -1)
 
 	if actual != dueYesterday {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, -1, dueYesterday, actual)
 	}
 
-	actual = translator.Translate(key, 0, nil, nil)
+	actual = translator.Translate(key, 0)
 
 	if actual != dueToday {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, 0, dueToday, actual)
 	}
 
-	actual = translator.Translate(key, 1, nil, nil)
+	actual = translator.Translate(key, 1)
 
 	if actual != dueTomorrow {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, 1, dueTomorrow, actual)
 	}
 
-	actual = translator.Translate(key, 2, nil, nil)
+	actual = translator.Translate(key, 2)
 
 	if actual != dueInTwoDays {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, 2, dueInTwoDays, actual)
 	}
 
-	actual = translator.Translate(key, 10, nil, nil)
+	actual = translator.Translate(key, 10)
 
 	if actual != dueInTenDays {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, 10, dueInTenDays, actual)
@@ -152,8 +152,6 @@ func TestTranslateTextWithFormatting(t *testing.T) {
 		map[string]string{
 			"name": "John",
 		},
-		nil,
-		nil,
 	)
 
 	if actual != value {
@@ -200,7 +198,6 @@ func TestTranslateTextUsingContexts(t *testing.T) {
 		map[string]string{
 			"gender": "male",
 		},
-		nil,
 	)
 
 	if actual != johnValue {
@@ -222,7 +219,6 @@ func TestTranslateTextUsingContexts(t *testing.T) {
 		map[string]string{
 			"gender": "female",
 		},
-		nil,
 	)
 
 	if actual != janeValue {
@@ -388,31 +384,31 @@ func TestTranslatePluralTextUsingExtension(t *testing.T) {
 
 	translator.Extend(russianExtension)
 
-	actual := translator.Translate(key, 0, nil, nil)
+	actual := translator.Translate(key, 0)
 
 	if actual != zeroResults {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, 0, zeroResults, actual)
 	}
 
-	actual = translator.Translate(key, 1, nil, nil)
+	actual = translator.Translate(key, 1)
 
 	if actual != oneResult {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, 1, oneResult, actual)
 	}
 
-	actual = translator.Translate(key, 11, nil, nil)
+	actual = translator.Translate(key, 11)
 
 	if actual != elevenResults {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, 11, elevenResults, actual)
 	}
 
-	actual = translator.Translate(key, 4, nil, nil)
+	actual = translator.Translate(key, 4)
 
 	if actual != fourResults {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, 4, fourResults, actual)
 	}
 
-	actual = translator.Translate(key, 101, nil, nil)
+	actual = translator.Translate(key, 101)
 
 	if actual != results {
 		t.Errorf("Should translate '%v' with num '%v' to '%v' but the result is '%v'", key, 101, results, actual)
